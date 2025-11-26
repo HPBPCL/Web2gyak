@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8" />
+    <title>Kapcsolat - NB1 Stats</title>
+    <base href="<%= typeof basePath !== 'undefined' ? basePath : '' %>/">
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="<%= basePath %>/">NB1 Stats</a>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="<%= basePath %>/">Főoldal</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="<%= basePath %>/database">Adatbázis</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead" style="background-image: url('assets/img/contact-bg.jpg'); margin-bottom: 0;">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>Lépj kapcsolatba velünk!</h1>
+                        <span class="subheading">Kérdésed van? Írj nekünk bátran.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container mb-5 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                <% if (success) { %>
+                    <div class="alert alert-success text-center"><strong>Köszönjük!</strong> Üzenetedet sikeresen megkaptuk.</div>
+                <% } %>
+                <form action="<%= basePath %>/contact" method="POST">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="name" name="nev" type="text" placeholder="Név" required />
+                        <label for="name">Teljes Név</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="email" name="email" type="email" placeholder="Email cím" required />
+                        <label for="email">Email cím</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="message" name="uzenet" placeholder="Ide írd az üzenetet..." style="height: 12rem" required></textarea>
+                        <label for="message">Üzenet szövege</label>
+                    </div>
+                    <div class="d-grid"><button class="btn btn-primary btn-xl" type="submit">Küldés</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="border-top mt-auto">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7"><div class="small text-center text-muted fst-italic">Copyright &copy; NB1 Statisztika Kft. 2024</div></div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8" />
+    <title>Regisztráció</title>
+    
+    <base href="<%= typeof basePath !== 'undefined' ? basePath : '' %>/">
+
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <style>body { font-family: sans-serif; background-color: #f8f9fa; }</style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="<%= basePath %>/">NB1 Stats</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="<%= basePath %>/">Főoldal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<%= basePath %>/login">Már van fiókom</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Fiók Létrehozása</h3></div>
+                    <div class="card-body">
+                        
+                        <% if (error) { %>
+                            <div class="alert alert-danger"><%= error %></div>
+                        <% } %>
+
+                        <form action="<%= basePath %>/register" method="POST">
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="inputUsername" name="username" type="text" placeholder="Felhasználónév" required />
+                                <label for="inputUsername">Felhasználónév</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="inputPassword" name="password" type="password" placeholder="Jelszó" required />
+                                <label for="inputPassword">Jelszó</label>
+                            </div>
+                            <div class="d-grid mt-4 mb-0">
+                                <button class="btn btn-primary btn-block" type="submit">Regisztráció</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center py-3">
+                        <div class="small"><a href="<%= basePath %>/login">Van már fiókod? Belépés</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

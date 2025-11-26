@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8" />
+    <title>Adatbázis - Játékosok</title>
+    <base href="<%= typeof basePath !== 'undefined' ? basePath : '' %>/">
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        .table-container { margin: 50px auto; max-width: 90%; }
+        h1 { text-align: center; margin-bottom: 30px; }
+        .draga-jatekos { font-weight: bold; color: green; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="<%= basePath %>/">NB1 Stats</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="<%= basePath %>/">Vissza a Főoldalra</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container table-container">
+        <h1>NB1 Játékos Adatbázis (Teljes lista)</h1>
+        <p class="text-center text-muted">A listában szereplő adatok a <b>labdarúgó</b>, a <b>klub</b> és a <b>poszt</b> táblák összekapcsolásából származnak.</p>
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Név</th>
+                    <th>Csapat (Klub tábla)</th>
+                    <th>Poszt (Poszt tábla)</th>
+                    <th>Születési idő</th>
+                    <th>Piaci Érték (ezer €)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (typeof players !== 'undefined' && players.length > 0) { %>
+                    <% players.forEach(function(player) { %>
+                        <tr>
+                            <td><strong><%= player.vezeteknev %> <%= player.utonev %></strong></td>
+                            <td><%= player.csapatnev %></td>
+                            <td><%= player.posztnev ? player.posztnev : 'Nincs adat' %></td>
+                            <td><%= player.szulido ? new Date(player.szulido).toLocaleDateString('hu-HU') : '-' %></td>
+                            <td class="<%= (player.ertek && Number(player.ertek) > 500) ? 'draga-jatekos' : '' %>">
+                                <%= player.ertek ? player.ertek : 0 %> €
+                            </td>   
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr><td colspan="5" style="text-align:center; color:red;">Nem sikerült betölteni az adatokat, vagy üres a lista.</td></tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

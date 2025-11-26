@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8" />
+    <title><%= action == 'add' ? 'Új Játékos' : 'Szerkesztés' %></title>
+    <base href="<%= typeof basePath !== 'undefined' ? basePath : '' %>/">
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body style="background-color: #f8f9fa;">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4><%= action == 'add' ? 'Új Játékos Felvétele' : 'Játékos Szerkesztése' %></h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="<%= basePath %>/admin/<%= action %><%= action == 'edit' ? '/' + player.id : '' %>" method="POST">
+                            <div class="row mb-3">
+                                <div class="col"><label>Vezetéknév</label><input type="text" name="vezeteknev" class="form-control" value="<%= player.vezeteknev || '' %>" required></div>
+                                <div class="col"><label>Keresztnév</label><input type="text" name="utonev" class="form-control" value="<%= player.utonev || '' %>" required></div>
+                            </div>
+                            <div class="mb-3">
+                                <label>Születési idő</label>
+                                <input type="date" name="szulido" class="form-control" value="<%= player.szulido ? new Date(player.szulido).toISOString().split('T')[0] : '' %>" required>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col"><label>Mezszám</label><input type="number" name="mezszam" class="form-control" value="<%= player.mezszam || '' %>"></div>
+                                <div class="col"><label>Piaci Érték (€)</label><input type="number" name="ertek" class="form-control" value="<%= player.ertek || '' %>"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label>Csapat (Klub)</label>
+                                <select name="klubid" class="form-control">
+                                    <% klubs.forEach(k => { %>
+                                        <option value="<%= k.id %>" <%= player.klubid == k.id ? 'selected' : '' %>><%= k.csapatnev %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label>Poszt</label>
+                                <select name="posztid" class="form-control">
+                                    <% poszts.forEach(p => { %>
+                                        <option value="<%= p.id %>" <%= player.posztid == p.id ? 'selected' : '' %>><%= p.nev %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Mentés</button>
+                            <a href="<%= basePath %>/admin" class="btn btn-secondary w-100 mt-2">Mégse</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
